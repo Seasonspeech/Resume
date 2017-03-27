@@ -1,7 +1,4 @@
 
-//Enter skils in this array
-var skills=
-["Problem solving", "JavaScript", "Python"];
 
 var bio= {
 	"name": "Phillip Fry",
@@ -16,7 +13,7 @@ var bio= {
 	},
 	"picture": "images/fry.jpg",
 	"welcome": "Welcome to my resume!",
-	"skills": skills,
+	"skills": ["Problem solving", "JavaScript", "Python"],
 	"display": function() {
 		//This function formats and displays all information from bio JSON
 		var formattedName=HTMLheaderName.replace("%data%", bio.name);
@@ -37,17 +34,11 @@ var bio= {
 
 		$("#header").append(formattedWelcome);
 
-		$("#topContacts").append(formattedMobile);
-		$("#topContacts").append(formattedTwitter);
-		$("#topContacts").append(formattedGithub);
-		$("#topContacts").append(formattedEmail);
-		$("#topContacts").append(formattedContactLocation);
+		$("#topContacts").append(formattedMobile, formattedTwitter, formattedGithub,
+			formattedEmail, formattedContactLocation);
 
-		$("#footerContacts").append(formattedMobile);
-		$("#footerContacts").append(formattedTwitter);
-		$("#footerContacts").append(formattedGithub);
-		$("#footerContacts").append(formattedEmail);
-		$("#footerContacts").append(formattedContactLocation);
+		$("#footerContacts").append(formattedMobile, formattedTwitter, formattedGithub, 
+			formattedEmail, formattedContactLocation);
 
 
 		if(bio.skills.length >0){
@@ -69,14 +60,14 @@ var work= {
 			"title": "Delivery Assistant",
 			"description": "Assisted with package deliveries",
 			"employer": "Planet Express",
-			"datesWorked" : "3/19/1999 to 4/19/2000",
+			"dates" : "3/19/1999 to 4/19/2000",
 			"location": "Brooklyn, NY"
 		},
 		{
 			"title": "Delivery Specialist",
 			"description": "Specialized in deliveries of all kinds",
 			"employer" : "Planet Express Specialties",
-			"datesWorked": "4/20/2000 to 4/25/2009",
+			"dates": "4/20/2000 to 4/25/2009",
 			"location": "Chicago, IL"
 		}],
 	"display" : function() {
@@ -87,7 +78,7 @@ var work= {
 			var formattedEmployer = HTMLworkEmployer.replace("%data%",work.jobs[i].employer);
 			var formattedTitle = HTMLworkTitle.replace("%data%",work.jobs[i].title);
 			var formattedEmployerTitle = formattedEmployer + formattedTitle;	
-			var formattedDatesWorked = HTMLworkDates.replace("%data%",work.jobs[i].datesWorked);
+			var formattedDatesWorked = HTMLworkDates.replace("%data%",work.jobs[i].dates);
 			var formattedLocation = HTMLworkLocation.replace("%data%",work.jobs[i].location);
 			var formattedDescription = HTMLworkDescription.replace("%data%",work.jobs[i].description);
 
@@ -105,7 +96,7 @@ var projects = {
 			"title": "Responsive resume",
 			"dates": "3/25/17 to present",
 			"description": "An interactive web resume",
-			"images":"images/WIP.gif"
+			"images":["images/WIP.gif"]
 		}],
 	"display": function() {
 		//This function formats and displays info from projects JSON
@@ -115,7 +106,12 @@ var projects = {
 			var formattedProjTitle = HTMLprojectTitle.replace("%data%",projects.projects[i].title);
 			var formattedProjDates = HTMLprojectDates.replace("%data%",projects.projects[i].dates);
 			var formattedProjDescription = HTMLprojectDescription.replace("%data%",projects.projects[i].description);
-			var formattedProjImages = HTMLprojectImage.replace("%data%",projects.projects[i].images);
+
+			var formattedProjImages=""
+			for(var j=0; j<projects.projects[i].images.length; j++){
+
+				formattedProjImages = formattedProjImages + HTMLprojectImage.replace("%data%",projects.projects[i].images[j]);
+			}
 
 			$(".project-entry:last").append(formattedProjTitle);
 			$(".project-entry:last").append(formattedProjDates);
@@ -133,7 +129,7 @@ var education = {
 			"dates": "2001 to 2004",
 			"url" : "http://samplesample.com",
 			"degree": "Bachelors of Science",
-			"major": "Package Delivery"
+			"majors": ["Package Delivery"]
 		},
 		{
 			"name": "Pizza Delivery University",
@@ -141,7 +137,7 @@ var education = {
 			"dates": "1997 to 1998",
 			"url" : "http://samplesample.com",
 			"degree": "Bachelors of Science",
-			"major": "Pizza Delivery"
+			"majors": ["Pizza Delivery", "Pizza Cooking"]
 		}]
 ,
 	"onlineCourses": [
@@ -160,8 +156,14 @@ var education = {
 			var formattedLocation = HTMLschoolLocation.replace("%data%",education.schools[i].location);
 			var formattedDates = HTMLschoolDates.replace("%data%", education.schools[i].dates);
 			var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[i].degree);
-			var formattedMajor = HTMLschoolMajor.replace("%data%",education.schools[i].major);
-			var formattedURL = HTMLonlineURL.replace("%data%",education.schools[i].url)
+
+			var formattedMajor=""
+			for(var j=0; j<education.schools[i].majors.length; j++){
+
+				formattedMajor = formattedMajor + HTMLschoolMajor.replace("%data%",education.schools[i].majors[j]);
+			}
+
+			var formattedURL = HTMLonlineURL.replace("%data%",education.schools[i].url);
 			var formattedSchoolDegree = formattedSchool + formattedDegree;
 
 			$(".education-entry:last").append(formattedSchoolDegree);
