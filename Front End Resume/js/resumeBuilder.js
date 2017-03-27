@@ -107,7 +107,7 @@ var projects = {
 			var formattedProjDates = HTMLprojectDates.replace("%data%",projects.projects[i].dates);
 			var formattedProjDescription = HTMLprojectDescription.replace("%data%",projects.projects[i].description);
 
-			var formattedProjImages=""
+			var formattedProjImages="";
 			for(var j=0; j<projects.projects[i].images.length; j++){
 
 				formattedProjImages = formattedProjImages + HTMLprojectImage.replace("%data%",projects.projects[i].images[j]);
@@ -157,7 +157,7 @@ var education = {
 			var formattedDates = HTMLschoolDates.replace("%data%", education.schools[i].dates);
 			var formattedDegree = HTMLschoolDegree.replace("%data%",education.schools[i].degree);
 
-			var formattedMajor=""
+			var formattedMajor="";
 			for(var j=0; j<education.schools[i].majors.length; j++){
 
 				formattedMajor = formattedMajor + HTMLschoolMajor.replace("%data%",education.schools[i].majors[j]);
